@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+<!-- Head -->
+   <head>
+      <title><%= title %></title>
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <link rel="stylesheet" href="/stylesheets/style.css" />
+      <link rel="stylesheet" type="text/css" href="/stylesheets/animate.css" />
+      <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" />
+      <link rel="stylesheet" type="text/css" href="/stylesheets/vue-daterange-picker.css" />
+      <link rel="stylesheet" type="text/css" href="/stylesheets/daterangepicker.css" />
+   </head>
+   <body>
+   <!-- App -->
+      <div id="app">
+      <!-- Menu -->
+         <div class="top-menu shadow-bottom animated fadeInDown">
+         <!-- My magic collabsible box -->
+            <div class="collabsible-box">
+               <!-- Make sure to set id for input checkbox same like label and unique | checked:expanded, not checked:hidden -->
+               <input id="collapsible1" class="toggle" type="checkbox" checked>
+               <label for="collapsible1" class="toggle-label" tabindex="0">Tab to Hide/Show |  <pre class="animated info fadeInDown"> Origin: {{ $store.state.activeFromPort?$store.state.activeFromPort.label:'Not Selected' }}</pre><pre class="animated info fadeInDown"> | Destination: {{ $store.state.activeToPort?$store.state.activeToPort.label:'Not Selected' }}</pre> <pre class="animated fadeInRight info">| Dates period: {{ $store.state.startDate || 'Not selected' }} to {{ $store.state.endDate || 'Not selected' }}</pre></label>
+               <div class="collapsible-content">
+                  <div class="content-inner">
+                     <div class="container">
+                        <div class="row justify-content-md-center">
+                           <div class="col align-self-center col-md-3 ml-md-auto">
+                           <!-- Origin select2 -->
+                              <v-select id="fromPort" :filterable="true" :options="optionsFromPort" @search="onSearchFromPort" @input="setActiveFromPort" placeholder="Search for from port.." >
+                                 <template slot="no-options">
+                                    No results found. Type to search ..
+                                 </template>
+                              </v-select>
+                           </div>
+                           <div class="col align-self-center col-md-3 ml-md-auto">
+                           <!-- Destination select2 -->
+                              <v-select id="toPort" :filterable="true" :options="optionsToPort" @search="onSearchToPort" @input="setActiveToPort" placeholder="Search for destination port..">
+                                 <template slot="no-options">
+                                   No results found. Type to search ..
+                                 </template>
+                              </v-select>
+                           </div>
+                           <div class="col align-self-center col-md-3 ml-md-auto black">
+                           <!-- Date Range picker -->
+                              <template>
+                                 <date-range-picker :start-date="startDate" :end-date="endDate" @update="setActiveDateRange" :locale-data="default_locale"></date-range-picker>
+                              </template>
+                           </div>
+                           <div class="col align-self-center col-md-3 ml-md-auto">
+                           <!-- Submit btn-->
+                              <button id="analyze" ref="analyze" type="button" class="btn btn-primary btn-custom" @click="getRates">Graph</button>
+                           </div>
+                        </div>
+                     </div>
+                  </div>
+               </div>
+            </div>
+         </div>
+         <div class="container main">
+            <div class="row justify-content-md-center">
+               <h1><%= title %></h1>
+               <p>Welcome to <%= title %>!</p>
+            </div>
+            <!-- For testing purpose
+               <pre>store.$state.ratesData: {{ $store.state.ratesData || 'null' }}</pre>
+               -->
+            <hr>
+            <div v-if="isRatesDataReady()">
+            <line-chart v-if="isRatesDataReady" :beginzero="true" :chart-data="chartData" :chart-options="chartOptions"></line-chart>
+            </div>
+            <div v-else>
+            <h2>No data found based on current fields selection. Please select data and press on Graph</h2>
+            </div>
+
+         </div>
+         <!--Responsive footer -->
+               <div class="footer shadow-top animated fadeInUp">
+                  <p>\\By Mohamed Husain 2018(c)</p>
+               </div>
+      </div>
+      <script type="application/javascript" src="/javascripts/app.js"></script>
+   </body>
+</html>
