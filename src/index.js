@@ -65,7 +65,7 @@ if(isBrowser) { //Some components require to run under window env.. its better t
                 labels: store.state.ratesData.labels,
                 datasets: [
                     {
-                        label: 'Prices over the time',
+                        label: 'Price',
                         backgroundColor: '#f87979',
                         data: store.state.ratesData.values
                     }
@@ -156,7 +156,7 @@ if(isBrowser) { //Some components require to run under window env.. its better t
                          labels: this.$store.state.ratesData.labels,
                          datasets: [
                              {
-                                 label: 'Prices over the time',
+                                 label: 'Price',
                                  backgroundColor: '#f87979',
                                  data: this.$store.state.ratesData.values
                              }
@@ -181,7 +181,7 @@ if(isBrowser) { //Some components require to run under window env.. its better t
                     labels: this.$store.state.ratesData.labels,
                     datasets: [
                         {
-                            label: 'Prices over the time',
+                            label: 'Price',
                             backgroundColor: '#f87979',
                             data: this.$store.state.ratesData.values
                         }
