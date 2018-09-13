@@ -30,7 +30,7 @@ combination, within a customizable date range.
 
 
 #Missing
- I should include those, but as you know I am working full time, I worked on this task just 10 ~ 15 minutes every day
+I should include those, but as you know I am working full time, I worked on this task just 10 ~ 15 minutes every day
 I believe if I work on it full time I can do better:
 
 * Advanced setup for webpack
